@@ -12,3 +12,9 @@
     color: white;
     background-color: var(--color-main);
 }
+.disabled{
+	color: grey;
+	background-color: transparent;
+    border: solid 1px currentColor;
+    cursor: not-allowed;
+}
