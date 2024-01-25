@@ -11,23 +11,35 @@ function App() {
 		{ name: 'Wyrzucić śmieci', done: true, id: 2 },
 	])
 
+	const [inputValue, setInputValue] = useState('')
+
 	function addItem(newTodoName) {
-		setTodos(prevTodos => [...prevTodos, { name: newTodoName, done: false, id: prevTodos.at(-1).id + 1 }])
+		setTodos(prevTodos => [...prevTodos, { name: newTodoName, done: false, id: Math.random() }])
 		setIsFormShown(false)
 	}
 
-	function finishItem(id) {
+	function finishItem(id, bool) {
 		setTodos(prevTodos =>
 			prevTodos.map(todo => {
 				if (todo.id === id) {
-					return { ...todo, done: true }
+					return { ...todo, done: bool }
 				} else {
 					return todo
 				}
 			})
 		)
 	}
-
+	function editItemName(id, newTodoName) {
+		setTodos(prevTodos =>
+			prevTodos.map(todo => {
+				if (todo.id === id) {
+					return { ...todo, name: newTodoName }
+				} else {
+					return todo
+				}
+			})
+		)
+	}
 	function deleteItem(id) {
 		setTodos(prevTodos => prevTodos.filter(todo => todo.id !== id))
 	}
@@ -45,15 +57,25 @@ function App() {
 					</button>
 				)}
 			</header>
-			{isFormShown && <Form onFormSubmit={newTodoName => addItem(newTodoName)} />}
+			{isFormShown && (
+				<Form
+					inputValue={inputValue}
+					setInputValue={setInputValue}
+					onFormSubmit={newTodoName => addItem(newTodoName)}
+				/>
+			)}
 			<ul>
 				{todos.map(({ name, done, id }) => (
 					<TodoItem
 						key={id}
 						name={name}
 						done={done}
-						onDoneButtonClick={() => finishItem(id)}
+						onDoneButtonClick={() => finishItem(id, true)}
+						onUndoneButtonClick={() => finishItem(id, false)}
 						onDeleteButtonClick={() => deleteItem(id)}
+						onSaveButtonClick={newTodoName => editItemName(id, newTodoName)}
+						inputValue={inputValue}
+						setInputValue={setInputValue}
 					/>
 				))}
 			</ul>

@@ -3,6 +3,7 @@
     background-color: transparent;
     border: solid 1px currentColor;
     border-radius: 4px;
+    margin: 0 2px;
     padding: 4px 8px;
     cursor: pointer;
     transition: all 0.3s;
@@ -17,4 +18,8 @@
 	background-color: transparent;
     border: solid 1px currentColor;
     cursor: not-allowed;
+}
+.disabled:hover{
+	color: grey;
+	background-color: transparent;
 }

@@ -2,7 +2,7 @@ export function getSubheading(numberOfTasks) {
 	switch (true) {
 		case numberOfTasks === 1:
 			return '1 zadanie'
-		case numberOfTasks <= 4:
+		case numberOfTasks > 1:
 			return `${numberOfTasks} zadania`
 		case numberOfTasks > 4:
 			return `${numberOfTasks} zadań`

@@ -2,8 +2,7 @@ import { useState } from 'react'
 import { Button } from '../Button/Button'
 import styles from './Form.module.css'
 
-export function Form({ onFormSubmit }) {
-	const [inputValue, setInputValue] = useState('')
+export function Form({ onFormSubmit, inputValue, setInputValue }) {
 	const [isDisabled, setIsDisabled] = useState(true)
 
 	function checkIfDisabled(input) {
