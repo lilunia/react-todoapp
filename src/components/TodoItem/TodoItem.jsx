@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Button } from '../Button/Button'
+import { ButtonCheck } from '../ButtonCheck/ButtonCheck'
 import styles from './TodoItem.module.css'
 
 export function TodoItem({
@@ -9,21 +10,19 @@ export function TodoItem({
 	onDeleteButtonClick,
 	onUndoneButtonClick,
 	onSaveButtonClick,
-	inputValue,
-	setInputValue,
 }) {
 	const [showEditInput, setShowEditInput] = useState(false)
+	const [newTodoName, setNewTodoName] = useState(false)
 
 	function showInput() {
-		setInputValue(name)
+		setNewTodoName(name)
 		setShowEditInput(true)
-	}
-	function editNameInput() {
-		setShowEditInput(false)
 	}
 
 	return (
 		<li className={styles.item}>
+			{!done && <ButtonCheck onClick={onDoneButtonClick}></ButtonCheck>}
+			{done && <ButtonCheck onClick={onUndoneButtonClick} disabled={true}></ButtonCheck>}
 			{!showEditInput && (
 				<span
 					className={`${styles.name} ${done ? styles.done : ''}`}
@@ -34,9 +33,9 @@ export function TodoItem({
 			)}
 			{showEditInput && (
 				<input
-					value={inputValue}
+					value={newTodoName}
 					onChange={e => {
-						setInputValue(e.target.value)
+						setNewTodoName(e.target.value)
 					}}
 					className={styles.input}
 					type='text'
@@ -45,16 +44,14 @@ export function TodoItem({
 			{showEditInput && (
 				<Button
 					onClick={() => {
-						onSaveButtonClick(inputValue)
-						editNameInput()
+						onSaveButtonClick(newTodoName)
+						setShowEditInput(false)
 					}}
 				>
 					Zapisz
 				</Button>
 			)}
 			<div className={styles.bcontainer}>
-				{!done && <Button onClick={onDoneButtonClick}>Zrobione</Button>}
-				{done && <Button onClick={onUndoneButtonClick}>Niezrobione</Button>}
 				<Button onClick={onDeleteButtonClick}>Usuń</Button>
 			</div>
 		</li>

@@ -1,29 +1,29 @@
 .item {
 	list-style: none;
 	display: flex;
-	justify-content: space-between;
 	align-items: center;
 	gap: 8px;
 	border-top: 1px solid #000;
-	margin-top: 16px;
-	padding-top: 16px;
+	padding: 16px 4px;
 	width: 100%;
 	min-width: 400px;
 }
-.bcontainer{
+.bcontainer {
 	display: flex;
 }
 .name {
 	width: 100%;
 }
 
-.done{
-    text-decoration: line-through;
+.done {
+	text-decoration: line-through;
+	font-style: italic;
+	color: #878787;
 }
 .input {
 	width: 100%;
-	width: 200px;
+	height: 100%;
 	padding: 4px 8px;
-	border: solid 1px currentColor;
+	border: none;
 	border-radius: 4px;
 }

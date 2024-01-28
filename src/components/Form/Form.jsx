@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { Button } from '../Button/Button'
 import styles from './Form.module.css'
 
-export function Form({ onFormSubmit, inputValue, setInputValue }) {
+export function Form({ inputValue, setInputValue, onFormSubmit, onUndoButtonClick }) {
 	const [isDisabled, setIsDisabled] = useState(true)
 
 	function checkIfDisabled(input) {
@@ -18,6 +18,7 @@ export function Form({ onFormSubmit, inputValue, setInputValue }) {
 			onSubmit={e => {
 				e.preventDefault()
 				onFormSubmit(inputValue)
+				setInputValue('')
 			}}
 			className={styles.form}
 		>
@@ -30,8 +31,14 @@ export function Form({ onFormSubmit, inputValue, setInputValue }) {
 				className={styles.input}
 				type='text'
 			/>
-			<Button disabled={isDisabled} className={styles.disabled}>
-				Dodaj
+			<Button disabled={isDisabled}>Dodaj</Button>
+			<Button
+				onClick={() => {
+					onUndoButtonClick()
+					setInputValue('')
+				}}
+			>
+				Cofnij
 			</Button>
 		</form>
 	)
