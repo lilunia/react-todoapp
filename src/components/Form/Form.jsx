@@ -13,6 +13,13 @@ export function Form({ inputValue, setInputValue, onFormSubmit, onUndoButtonClic
 		}
 	}
 
+	function handleKeyDown(e) {
+		if (e.target.value != '' && e.key === 'Enter') {
+			onFormSubmit(inputValue)
+			setInputValue('')
+		}
+	}
+
 	return (
 		<form
 			onSubmit={e => {
@@ -28,8 +35,12 @@ export function Form({ inputValue, setInputValue, onFormSubmit, onUndoButtonClic
 					setInputValue(e.target.value)
 					checkIfDisabled(e.target.value)
 				}}
+				onKeyDown={e => {
+					handleKeyDown(e)
+				}}
 				className={styles.input}
 				type='text'
+				placeholder='Wpisz treść zadania...'
 			/>
 			<Button disabled={isDisabled}>Dodaj</Button>
 			<Button

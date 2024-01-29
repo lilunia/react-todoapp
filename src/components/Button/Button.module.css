@@ -1,5 +1,6 @@
 .button{
     color: var(--color-main);
+    font-style: inherit;
     background-color: transparent;
     border: solid 1px currentColor;
     border-radius: 4px;

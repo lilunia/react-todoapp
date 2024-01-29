@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Button } from '../Button/Button'
 import { ButtonCheck } from '../ButtonCheck/ButtonCheck'
 import styles from './TodoItem.module.css'
+import trashIcon from './trash.svg'
 
 export function TodoItem({
 	name,
@@ -52,7 +53,9 @@ export function TodoItem({
 				</Button>
 			)}
 			<div className={styles.bcontainer}>
-				<Button onClick={onDeleteButtonClick}>Usuń</Button>
+				<ButtonCheck onClick={onDeleteButtonClick}>
+					{<img className={styles.img} src={trashIcon}></img>}
+				</ButtonCheck>
 			</div>
 		</li>
 	)

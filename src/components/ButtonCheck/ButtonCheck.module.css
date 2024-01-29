@@ -1,27 +1,43 @@
-.button{
-    color: var(--color-main);
-    background-color: transparent;
-    border: solid 1px currentColor;
-    border-radius: 4px;
-    margin: 0 2px;
-    padding: 8px;
-    cursor: pointer;
-    transition: all 0.3s;
+.button {
+	color: var(--color-main);
+	background-color: transparent;
+	border: solid 1px currentColor;
+	border-radius: 4px;
+	margin: 0 2px;
+	padding: 8px;
+	cursor: pointer;
+	transition: all 0.3s;
 }
 
-.button:hover{
-    scale: 1.1;
+.button:hover {
+	scale: 1.1;
 }
-.disabled{
+.disabled {
 	color: grey;
 	background-color: var(--color-main);
-    border: solid 1px currentColor;
-    cursor: not-allowed;
+	border: solid 1px currentColor;
+	cursor: not-allowed;
 }
-.disabled:hover{
+.disabled:hover {
 	color: grey;
 	background-color: transparent;
 }
-.checked{
-    background-color: var(--color-main);
+.checked {
+	position: relative;
+	color: white;
+	background-color: var(--color-main);
+}
+.checked::before {
+	display: block;
+	content: 'X';
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	color: #fff;
+	transform: translate(-50%, -50%) scale(1.2);
+	transition: all 0.2s ease-in-out 0.1s;
+}
+
+.checked:hover::before {
+	transform: translate(-50%, -50%) scale(1.5);
 }

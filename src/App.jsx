@@ -13,11 +13,14 @@ function App() {
 		{ name: 'Zapłacić rachunki', done: false, id: 1 },
 		{ name: 'Wyrzucić śmieci', done: true, id: 2 },
 	])
+
+
+	
 	function addItem(newTodoName) {
 		setTodos(prevTodos => [...prevTodos, { name: newTodoName, done: false, id: Math.random() }])
 		setIsFormShown(false)
 	}
-	
+
 	function finishItem(id, bool) {
 		setTodos(prevTodos =>
 			prevTodos.map(todo => {
@@ -43,24 +46,24 @@ function App() {
 	function deleteItem(id) {
 		setTodos(prevTodos => prevTodos.filter(todo => todo.id !== id))
 	}
-	
+
 	function handleDragDrop(results) {
 		const { source, destination } = results
-	
+
 		if (!destination) return
 		if (source.droppableId === destination.droppableId && source.index === destination.index) return
 		else {
 			const reorderedTodos = [...todos]
 			const sourceIndex = source.index
 			const destinationIndex = destination.index
-	
+
 			const [removedTodo] = reorderedTodos.splice(sourceIndex, 1)
 			reorderedTodos.splice(destinationIndex, 0, removedTodo)
-	
+
 			return setTodos(reorderedTodos)
 		}
 	}
-	
+
 	return (
 		<div className={styles.container}>
 			<header className={styles.header}>
@@ -109,7 +112,6 @@ function App() {
 											ref={provided.innerRef}
 										>
 											<TodoItem
-												id={id}
 												name={name}
 												done={done}
 												onDoneButtonClick={() =>
@@ -133,12 +135,6 @@ function App() {
 														newTodoName
 													)
 												}}
-												inputValue={inputValue}
-												setInputValue={
-													setInputValue
-												}
-												todos={todos}
-												setTodos={setTodos}
 											/>
 										</div>
 									)}
@@ -151,8 +147,6 @@ function App() {
 			</DragDropContext>
 		</div>
 	)
-
-
 }
 
 export default App
