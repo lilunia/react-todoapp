@@ -10,10 +10,15 @@ function App() {
 	const [isFormShown, setIsFormShown] = useState(false)
 	const [inputValue, setInputValue] = useState('')
 
-	const [todos, setTodos] = useState([
-		{ name: 'Zapłacić rachunki', done: false, id: 1 },
-		{ name: 'Wyrzucić śmieci', done: true, id: 2 },
-	])
+	const [todos, setTodos] = useState(
+		JSON.parse(localStorage.getItem('todos')) || [
+			{ name: 'Zapłacić rachunki', done: false, id: 1 },
+			{ name: 'Wyrzucić śmieci', done: true, id: 2 },
+			{ name: 'Zrobić przegląd samochodu', done: false, id: 3 },
+		]
+	)
+
+	localStorage.setItem('todos', JSON.stringify(todos))
 
 	function handleDragDrop({ source, destination }) {
 		if (!destination) return
