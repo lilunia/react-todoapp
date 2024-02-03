@@ -4,6 +4,7 @@ import { Form } from './components/Form/Form'
 import { TodoItem } from './components/TodoItem/TodoItem'
 import { getSubheading } from './utils/getSubheading'
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
+import { addItem, finishItem, editItemName, deleteItem } from './utils/handleItems'
 
 function App() {
 	const [isFormShown, setIsFormShown] = useState(false)
@@ -14,42 +15,7 @@ function App() {
 		{ name: 'Wyrzucić śmieci', done: true, id: 2 },
 	])
 
-
-	
-	function addItem(newTodoName) {
-		setTodos(prevTodos => [...prevTodos, { name: newTodoName, done: false, id: Math.random() }])
-		setIsFormShown(false)
-	}
-
-	function finishItem(id, bool) {
-		setTodos(prevTodos =>
-			prevTodos.map(todo => {
-				if (todo.id === id) {
-					return { ...todo, done: bool }
-				} else {
-					return todo
-				}
-			})
-		)
-	}
-	function editItemName(id, newTodoName) {
-		setTodos(prevTodos =>
-			prevTodos.map(todo => {
-				if (todo.id === id) {
-					return { ...todo, name: newTodoName }
-				} else {
-					return todo
-				}
-			})
-		)
-	}
-	function deleteItem(id) {
-		setTodos(prevTodos => prevTodos.filter(todo => todo.id !== id))
-	}
-
-	function handleDragDrop(results) {
-		const { source, destination } = results
-
+	function handleDragDrop({ source, destination }) {
 		if (!destination) return
 		if (source.droppableId === destination.droppableId && source.index === destination.index) return
 		else {
@@ -87,7 +53,7 @@ function App() {
 				<Form
 					inputValue={inputValue}
 					setInputValue={setInputValue}
-					onFormSubmit={newTodoName => addItem(newTodoName)}
+					onFormSubmit={newTodoName => addItem(newTodoName, setTodos, setIsFormShown)}
 					onUndoButtonClick={() => setIsFormShown(false)}
 				/>
 			)}
@@ -117,22 +83,28 @@ function App() {
 												onDoneButtonClick={() =>
 													finishItem(
 														id,
-														true
+														true,
+														setTodos
 													)
 												}
 												onUndoneButtonClick={() =>
 													finishItem(
 														id,
-														false
+														false,
+														setTodos
 													)
 												}
 												onDeleteButtonClick={() =>
-													deleteItem(id)
+													deleteItem(
+														id,
+														setTodos
+													)
 												}
 												onSaveButtonClick={newTodoName => {
 													editItemName(
 														id,
-														newTodoName
+														newTodoName,
+														setTodos
 													)
 												}}
 											/>
