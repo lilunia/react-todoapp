@@ -1,37 +1,40 @@
-import { useState } from 'react'
+import { useState, useReducer, useEffect } from 'react'
 import styles from './App.module.css'
 import { Form } from './components/Form/Form'
 import { TodoItem } from './components/TodoItem/TodoItem'
 import { getSubheading } from './utils/getSubheading'
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
-import { addItem, finishItem, editItemName, deleteItem } from './utils/handleItems'
+import { appReducer } from '../reducer/appReducer'
 
 function App() {
-	const [isFormShown, setIsFormShown] = useState(false)
 	const [inputValue, setInputValue] = useState('')
+	let initialTodos = [
+		{ name: 'Zapłacić rachunki', done: false, id: 1 },
+		{ name: 'Wyrzucić śmieci', done: true, id: 2 },
+		{ name: 'Zrobić przegląd samochodu', done: false, id: 3 },
+	]
 
-	const [todos, setTodos] = useState(
-		JSON.parse(localStorage.getItem('todos')) || [
-			{ name: 'Zapłacić rachunki', done: false, id: 1 },
-			{ name: 'Wyrzucić śmieci', done: true, id: 2 },
-			{ name: 'Zrobić przegląd samochodu', done: false, id: 3 },
-		]
-	)
+	const [{ todos, isFormShown }, dispatch] = useReducer(appReducer, {
+		todos: JSON.parse(localStorage.getItem('todos')) || initialTodos,
+		isFormShown: false,
+	})
 
-	localStorage.setItem('todos', JSON.stringify(todos))
+	useEffect(() => {
+		localStorage.setItem('todos', JSON.stringify(todos))
+	}, [todos])
 
 	function handleDragDrop({ source, destination }) {
 		if (!destination) return
 		if (source.droppableId === destination.droppableId && source.index === destination.index) return
 		else {
 			const reorderedTodos = [...todos]
+
 			const sourceIndex = source.index
 			const destinationIndex = destination.index
-
 			const [removedTodo] = reorderedTodos.splice(sourceIndex, 1)
 			reorderedTodos.splice(destinationIndex, 0, removedTodo)
 
-			return setTodos(reorderedTodos)
+			dispatch({ type: 'reorder', todos: reorderedTodos })
 		}
 	}
 
@@ -46,7 +49,7 @@ function App() {
 					<button
 						className={styles.button}
 						onClick={() => {
-							setIsFormShown(true)
+							dispatch({ type: 'open_form' })
 							setInputValue('')
 						}}
 					>
@@ -58,8 +61,8 @@ function App() {
 				<Form
 					inputValue={inputValue}
 					setInputValue={setInputValue}
-					onFormSubmit={newTodoName => addItem(newTodoName, setTodos, setIsFormShown)}
-					onUndoButtonClick={() => setIsFormShown(false)}
+					onFormSubmit={newTodoName => dispatch({ type: 'add', newTodoName })}
+					onUndoButtonClick={() => dispatch({ type: 'close_form' })}
 				/>
 			)}
 			<DragDropContext onDragEnd={handleDragDrop}>
@@ -85,33 +88,31 @@ function App() {
 											<TodoItem
 												name={name}
 												done={done}
-												onDoneButtonClick={() =>
-													finishItem(
-														id,
-														true,
-														setTodos
-													)
-												}
 												onUndoneButtonClick={() =>
-													finishItem(
+													dispatch({
+														type: 'unfinish',
 														id,
-														false,
-														setTodos
-													)
+													})
+												}
+												onDoneButtonClick={() =>
+													dispatch({
+														type: 'finish',
+														id,
+													})
 												}
 												onDeleteButtonClick={() =>
-													deleteItem(
+													dispatch({
+														type: 'delete',
 														id,
-														setTodos
-													)
+													})
 												}
-												onSaveButtonClick={newTodoName => {
-													editItemName(
+												onSaveButtonClick={newTodoName =>
+													dispatch({
+														type: 'edit',
 														id,
 														newTodoName,
-														setTodos
-													)
-												}}
+													})
+												}
 											/>
 										</div>
 									)}
