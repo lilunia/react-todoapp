@@ -1,7 +1,6 @@
 .item {
 	padding: 16px 4px;
 	width: 100%;
-	min-width: 400px;
 	display: flex;
 	align-items: center;
 	list-style: none;
@@ -9,11 +8,10 @@
 	border-top: 1px solid #000;
 	background-color: #fff;
 }
-.bcontainer {
-	display: flex;
-}
 .name {
+	overflow-wrap: break-word;
 	width: 100%;
+	max-width: 168px;
 }
 
 .done {
@@ -30,4 +28,10 @@
 }
 .img{
 	display: block;
+}
+
+@media(min-width:768px){
+	.name {
+		max-width: 368px;
+	}
 }

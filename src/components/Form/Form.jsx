@@ -38,18 +38,19 @@ export function Form({ inputValue, setInputValue, onFormSubmit, onUndoButtonClic
 				onKeyDown={e => {
 					handleKeyDown(e)
 				}}
+				maxLength='50'
 				className={styles.input}
 				type='text'
-				placeholder='Wpisz treść zadania...'
+				placeholder='Type the task...'
 			/>
-			<Button disabled={isDisabled}>Dodaj</Button>
+			<Button disabled={isDisabled}>Add</Button>
 			<Button
 				onClick={() => {
 					onUndoButtonClick()
 					setInputValue('')
 				}}
 			>
-				Cofnij
+				Back
 			</Button>
 		</form>
 	)

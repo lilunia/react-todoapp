@@ -9,9 +9,9 @@ import { appReducer } from '../reducer/appReducer'
 function App() {
 	const [inputValue, setInputValue] = useState('')
 	let initialTodos = [
-		{ name: 'Zapłacić rachunki', done: false, id: 1 },
-		{ name: 'Wyrzucić śmieci', done: true, id: 2 },
-		{ name: 'Zrobić przegląd samochodu', done: false, id: 3 },
+		{ name: 'Pay the bills', done: false, id: 1 },
+		{ name: 'Throw out the rubbish', done: true, id: 2 },
+		{ name: 'Car inspection', done: false, id: 3 },
 	]
 
 	const [{ todos, isFormShown }, dispatch] = useReducer(appReducer, {
@@ -41,8 +41,8 @@ function App() {
 	return (
 		<div className={styles.container}>
 			<header className={styles.header}>
-				<div>
-					<h1>Do zrobienia</h1>
+				<div className={styles.headerContainer}>
+					<h1>To do</h1>
 					<h2>{getSubheading(todos.length)}</h2>
 				</div>
 				{!isFormShown && (

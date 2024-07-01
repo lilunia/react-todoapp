@@ -25,12 +25,12 @@ export function TodoItem({
 			{!done && <ButtonCheck onClick={onDoneButtonClick}></ButtonCheck>}
 			{done && <ButtonCheck onClick={onUndoneButtonClick} disabled={true}></ButtonCheck>}
 			{!showEditInput && (
-				<span
+				<div
 					className={`${styles.name} ${done ? styles.done : ''}`}
 					onClick={() => showInput()}
 				>
 					{name}
-				</span>
+				</div>
 			)}
 			{showEditInput && (
 				<input
@@ -49,10 +49,10 @@ export function TodoItem({
 						setShowEditInput(false)
 					}}
 				>
-					Zapisz
+					Save
 				</Button>
 			)}
-			<div className={styles.bcontainer}>
+			<div>
 				<ButtonCheck onClick={onDeleteButtonClick}>
 					{<img className={styles.img} src={trashIcon}></img>}
 				</ButtonCheck>

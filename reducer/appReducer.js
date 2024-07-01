@@ -51,7 +51,6 @@ export function appReducer(state, action) {
 				isFormShown: false,
 			}
 		case 'reorder':
-			console.log('hello')
 			return {
 				...state,
 				todos: [...action.todos],

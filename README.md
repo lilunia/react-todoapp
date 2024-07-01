@@ -1,6 +1,10 @@
 # Todo App
 
-Todo list project was created with Vite+React. This app was written in polish language.
+Todo list project was created with Vite+React.
+
+## Live
+
+<a href = 'https://todoapp-lilunia.netlify.app'>https://todoapp-lilunia.netlify.app</a>
 
 ## Technologies
 
@@ -13,15 +17,15 @@ Todo list project was created with Vite+React. This app was written in polish la
 
 This application has the following features:
 
-- **Adding a new task** - to add a new task click on the '+' icon and in the pop-up form enter a task name and click on the 'Dodaj' button or press Enter.
-- **Editing a task** - to edit the name of a task just click on the task name, enter a new name and then click on 'Zapisz'.
+- **Adding a new task** - to add a new task click on the '+' icon and in the pop-up form enter a task name and click on the 'Add' button or press Enter.
+- **Editing a task** - to edit the name of a task just click on the task name, enter a new name and then click on 'Save'.
 - **Changing task status (done / undone)** - by clicking on the rectangle next to the task, the task will change status to done or undone.
 - **Task counter** - shows the current number of task.
 - **Drag and drop functionality** - thanks to the use of <a href = 'https://github.com/atlassian/react-beautiful-dnd'>react-beautiful-dnd</a>, the order of tasks can be changed by simply dragging the todo and dropping it to another place (before or after).
-- Local Storage.
+- todo list is stored in Local Storage.
 
 ## Screenshot
 
   <p align="center">
-  <img src="./src//img/todoApp.PNG" width= "70%" height= "70%" alt="Main app screenshot">
+  <img src="./src//img/todoApp.png" width= "70%" height= "70%" alt="Main app screenshot">
   </p>
