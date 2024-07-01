@@ -27,5 +27,5 @@ This application has the following features:
 ## Screenshot
 
   <p align="center">
-  <img src="./src//img/todoApp.png" width= "70%" height= "70%" alt="Main app screenshot">
+  <img src="./src//img/todoApp.PNG" width= "100%" height= "100%" alt="Main app screenshot">
   </p>
