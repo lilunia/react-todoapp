@@ -5,6 +5,6 @@ export function getSubheading(numberOfTasks) {
 		case numberOfTasks > 1:
 			return `${numberOfTasks} tasks`
 		default:
-			return 'Brak zadań'
+			return 'No tasks'
 	}
 }
